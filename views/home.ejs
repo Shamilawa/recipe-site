@@ -1,0 +1,119 @@
+<%- include('partials/header') %>
+
+<!-- Main Page Container -->
+<div class="page-container">
+
+
+    <!-- Hero Section -->
+    <div class="hero-container">
+        <h1>Simple and <br> Tasty Recipes</h1>
+        <p> sdasdLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. </p>
+        <div class="add-new-recipe-btn">
+            <button id="open-form">Add New Recipe</button>
+        </div>
+        
+    </div>
+
+
+    <!-- Recipe Card Section -->
+    <div class="recipe-container"> 
+
+        <% recipes.forEach(recipe=> { %>
+        
+            <div class="recipe-card">
+                <div class="recipe-img"
+                    style="background-image: url(' <%= recipe.url %> ');">
+                </div>
+                <div class="recipe-card-inner">
+                    <h1> <%= recipe.repName %>  </h1>
+                    <hr>
+        
+                    <!-- Mini Block with icon pack -->
+                    <div class="three-part-container">
+        
+                        <!-- Cooking Time -->
+                        <div class="infor-container">
+                            <div class="small-infor-container">
+                                <img src="img/time-icon.png" alt="">
+                                <p> <%= recipe.cookTime %>  </p>
+                            </div>
+                            <p class="outer-p">Minutes</p>
+                        </div>
+        
+                        <!-- Ingreding -->
+                        <div class="infor-container">
+                            <div class="small-infor-container">
+                                <img src="img/book-icon.png" alt="">
+                                <p> <%= recipe.ingredients %> </p>
+                            </div>
+                            <p class="outer-p">Ingredients</p>
+                        </div>
+        
+                        <!-- Serving Amount -->
+                        <div class="infor-container">
+                            <div class="small-infor-container">
+                                <img src="img/serve-icon.png" alt="">
+                                <p> <%= recipe.serve %> </p>
+                            </div>
+                            <p class="outer-p">Serving</p>
+                        </div>
+        
+                    </div>
+                    
+                    <% const fullDescription = recipe.description;  %>
+                    <% const extractedDescription = fullDescription.substring(0, 150);%> 
+
+                    <p class="recipe-card-description"> <%= extractedDescription + " ..."%> </p>
+        
+                    <a href="/recipe/<%=recipe.id%>">View Recipe</a>
+        
+        
+                </div>
+            </div>
+        <% }) %>
+
+    </div>
+
+
+    <!-- Add Recipe Section Form -->
+    <div class="wrapper" id="form-modal-container">
+        <form action="/" method="post">
+            <div class="modal-form">
+    
+                <div class="form-header-section">
+    
+                    <div>
+                        <p class="header-paragraph">New Recipe Form</p>
+                        <h1 class="header-title"> Add Your Recipe </h1>
+                    </div>
+    
+                    <div id="close-form" class="close-btn">&times;</div>
+    
+                </div>
+    
+    
+                <input name="recipeName" class="form-inputs" type="text" placeholder="Recipe Name" required>
+    
+                <div class="info-section">
+                    <input name="cookTime" class="form-inputs" type="text" placeholder="Cooking Time" required>
+                    <input name="ingredients" class="form-inputs" type="text" placeholder="Number of Ingredients" required>
+                    <input name="serve" class="form-inputs" type="text" placeholder="Serving Amount" required>
+                </div>
+    
+                <textarea name="description" name="recipe-description" placeholder="Recipe Description" id="" cols="30" rows="10" required></textarea>
+    
+                <input name="url" class="form-inputs" type="text" placeholder="Image Url" required>
+    
+                <button type="submit"> Add Recipe </button>
+    
+            </div>
+        </form>
+    
+    </div>
+
+
+
+</div>
+
+<%- include('partials/footer') %>
